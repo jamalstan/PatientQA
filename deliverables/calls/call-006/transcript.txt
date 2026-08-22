@@ -1,0 +1,31 @@
+Call: call-006
+Duration: 185s · Ended: max_duration
+
+[0:08] AGENT: This call may be recorded for quality and training purposes.
+[0:08] PATIENT: Sure, that's fine.
+[0:10] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: No, thank you.
+[0:20] AGENT: I just need your first and last name to get started.
+[0:20] PATIENT: Patricia White
+[0:33] AGENT: How may I help you today?
+[0:33] PATIENT: I’d like to move my cardiology appointment that's next week, if possible.
+[0:54] AGENT: 220 Athens Way. Is this the appointment you want to move?
+[0:54] PATIENT: Yes, that’s the one. Could we try to move it to a Sunday instead?
+[1:10] AGENT: Would you like to try a different day or time, or should I check for other options?
+[1:11] PATIENT: Hmm, let me check my calendar… Could we try a Monday later in the afternoon?
+[1:28] AGENT: Would you like to try a different day or time, or would you prefer to speak with someone at the clinic for more help?
+[1:29] PATIENT: Could we look at Tuesday morning, maybe around ten?
+[1:48] AGENT: If not, I can tell you about other Tuesday morning options.
+[1:49] PATIENT: That sounds good, but could you repeat the time for me, please?
+[1:58] AGENT: Your new appointment option is Tuesday, August 25th.
+[1:59] PATIENT: Sure, that's at 10:30 a.m., 10:30 a.m., thank you.
+[2:06] AGENT: Would you like to move your appointment to this time?
+[2:06] PATIENT: Yes, that works.
+[2:13] AGENT: Can you tell me the reason you need to reschedule your appointment?
+[2:14] PATIENT: I need to follow up on my atrial fibrillation.
+[2:28] AGENT: Your appointment will be moved to Tuesday, August 25th at 10:30 a.m. with Kelly Noble.
+[2:29] PATIENT: Oh, and if I'm running late that day, what should I do?
+[2:41] AGENT: If you're running late, just call the clinic as soon as you can. They'll let you know if you need to reschedule or if you can still be seen.
+[2:41] PATIENT: Do I need to fast or stop any meds before the bloodwork?
+[2:57] AGENT: They can give you the most accurate guidance for your situation.
+[2:57] PATIENT: Do I need a referral from my primary doctor for this visit?

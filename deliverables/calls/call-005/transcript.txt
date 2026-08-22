@@ -1,0 +1,39 @@
+Call: call-005
+Duration: 185s · Ended: max_duration
+
+[0:08] AGENT: This call may be recorded for quality and training purposes.
+[0:11] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: Yes, hello, this is Sofia Vargas.
+[0:16] AGENT: Hi, there.
+[0:17] PATIENT: Hi, I’d like to schedule my annual gastroenterology check‑up.
+[0:20] AGENT: How can I help you today?
+[0:21] PATIENT: I need a weekday slot at 12:30 next week, please.
+[0:28] AGENT: I can help with that.
+[0:28] PATIENT: Great, may I give my details?
+[0:35] AGENT: I just need your first and last name.
+[0:35] PATIENT: Sofia Vargas
+[0:47] AGENT: How can I help you today?
+[0:47] PATIENT: My date of birth is October 8, 1968.
+[1:00] AGENT: Just to confirm, you'd like to schedule a general office visit for your annual gastroenterology checkup?
+[1:00] PATIENT: Yes, that's correct.
+[1:02] AGENT: Is that correct?
+[1:02] PATIENT: Yes, that's correct.
+[1:18] AGENT: We have several weekday openings next week, including Monday, August 24th. The closest available times to 12:30 are 11:30 AM and 2:00 PM.
+[1:18] PATIENT: Hmm, let me check my schedule…
+[1:20] AGENT: Would you like to book one of those, or should I check?
+[1:21] PATIENT: Could you check if there’s a 12:30 slot on Tuesday, August 27?
+[1:38] AGENT: The closest times are 11:30 AM or 2:00 PM. Would either of those work for you?
+[1:38] PATIENT: Actually Tuesday is the 27th, could you check a 12:30 slot then?
+[1:52] AGENT: Would you like me to check for a 12:30 slot on Tuesday, August 25th?
+[1:53] PATIENT: Yes, please check for a 12:30 slot on Tuesday, August 25th.
+[2:02] AGENT: There isn't.
+[2:03] PATIENT: Oh, okay. Could you see if there’s a 12:30 slot on Wednesday, August 26?
+[2:17] AGENT: There isn't a 12:30 slot on Wednesday, August 26th.
+[2:17] PATIENT: Okay, could you tell me which entrance I should use when I come in?
+[2:19] AGENT: The closest times are 11:30.
+[2:20] PATIENT: I understand, but could you tell me which entrance I should use when I arrive?
+[2:29] AGENT: Would you like to try a different time or date, or do you want to book one of the closest available slots?
+[2:30] PATIENT: Actually, could you tell me which entrance I should use when I arrive, then we can decide on a time.
+[2:46] AGENT: Would you like to pick a time now?
+[2:46] PATIENT: Okay, please book the 11:30 slot on Monday, August 24th.
+[3:01] PATIENT: Hello? Are you still there?

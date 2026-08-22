@@ -1,0 +1,40 @@
+Call: call-004
+Duration: 185s · Ended: max_duration
+
+[0:08] AGENT: This call may be recorded for quality and training purposes.
+[0:11] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: Yes, I understand.
+[0:13] AGENT: Thank you for calling.
+[0:13] PATIENT: Hello, this is Betty Wilson.
+[0:19] AGENT: Hi, Betty.
+[0:21] AGENT: How can I help you today?
+[0:21] PATIENT: I’d like to cancel my gastroenterology appointment for next week, please.
+[0:32] AGENT: Would you like to create a demo patient profile first?
+[0:33] PATIENT: No, I just want to cancel the existing appointment.
+[0:39] AGENT: No problem.
+[0:40] PATIENT: Can you confirm the cancellation?
+[0:42] AGENT: You can scan the QR code at the booth.
+[0:42] PATIENT: Could you please confirm that the appointment is cancelled?
+[0:59] AGENT: Is there anything else I can help you with?
+[0:59] PATIENT: Actually, could you tell me a good window to rebook in a couple of months?
+[1:08] AGENT: I'd be happy to help with that.
+[1:08] PATIENT: I prefer early afternoon slots if possible.
+[1:15] AGENT: Would you like to do that now?
+[1:15] PATIENT: No, I’d rather not create a demo profile.
+[1:16] AGENT: I just need your first and last name.
+[1:17] PATIENT: Betty Wilson
+[1:30] AGENT: I'm here helping today.
+[1:31] PATIENT: My date of birth is January 9, 1971.
+[1:49] AGENT: Is this the one you want to cancel? If so, can you share the reason for canceling?
+[1:49] PATIENT: Yes, that's the one. I’m canceling because of a schedule conflict.
+[2:07] AGENT: Would you like to rebook for a different day, or is there anything else I can help you with?
+[2:08] PATIENT: If I run late on the day, what should I do?
+[2:23] AGENT: They'll let you know if you should still come in or if you need to reschedule. Is there anything else you'd like to know?
+[2:23] PATIENT: Actually, one more thing: could you read back the final appointment details for me?
+[2:34] AGENT: You don't have any upcoming appointments scheduled right now.
+[2:35] PATIENT: My pharmacy changed; please send refills to the new downtown pharmacy.
+[2:40] AGENT: Would you like to book a new one?
+[2:40] PATIENT: No, I just need the refills sent to my new downtown pharmacy, please.
+[2:50] AGENT: I don't see any medications on your chart that I can refill right now.
+[2:54] AGENT: If you have questions or need help with something else, just let me know.
+[2:55] PATIENT: I understand, but I take omeprazole and need a refill sent to my new downtown pharmacy.

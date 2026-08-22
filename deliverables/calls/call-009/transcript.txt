@@ -1,0 +1,29 @@
+Call: call-009
+Duration: 185s · Ended: max_duration
+
+[0:08] AGENT: This call may be recorded for quality and training purposes.
+[0:10] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: Yes, English please.
+[0:28] PATIENT: Hello? Are you still there?
+[0:31] AGENT: Sure. How can I assist you today?
+[0:31] PATIENT: Sam Young, I need to schedule my semi-annual thyroid check.
+[0:45] PATIENT: Hello? Are you still there?
+[0:47] AGENT: Would you like to create a demo patient profile so I can help schedule your thyroid check? I just need your first and last name to get started.
+[0:47] PATIENT: Sam Young
+[1:00] AGENT: Your patient profile is set up, and your date of birth is July 4th, 2000. How can I help you today?
+[1:01] PATIENT: Actually, my birthdate is June 15, 1966.
+[1:13] AGENT: Sam, you mentioned needing your semi-annual thyroid check.
+[1:16] AGENT: Is this for a general office visit to check your thyroid levels?
+[1:16] PATIENT: Yes, that's right, just a check.
+[1:27] AGENT: Do you have a specific provider you'd like to see, or are you open to the next available?
+[1:27] PATIENT: I'm open to the next slot, preferably in the afternoon.
+[1:46] AGENT: You already have an office visit scheduled for Tuesday, August 25th at 10:30 a.m. Since you can't book another of the same type right now, would you like to reschedule that appointment to an afternoon slot instead?
+[1:46] PATIENT: Hmm, let me check my calendar…
+[1:56] AGENT: Take your time. Let me know if you'd like to keep or reschedule your appointment.
+[1:56] PATIENT: Okay, let's keep that appointment for now.
+[2:12] AGENT: You're all set for your office visit on Tuesday, August 25th at 10:30 a.m. If you need to make any changes later, just let me know. Is there anything else I can help you with?
+[2:12] PATIENT: Actually, could we move it to next week, maybe Wednesday afternoon?
+[2:31] AGENT: You have an office visit with Kelly Noble, MD on Tuesday, August 25th at 10:30 a.m. Can you tell me the reason you need to reschedule this appointment?
+[2:31] PATIENT: I just realized I have a meeting that morning, so I'd prefer an afternoon slot.
+[2:49] AGENT: Just to confirm, you'd like to move your appointment to Wednesday afternoon next week. That would be Wednesday, September 2nd. Should I look for openings that afternoon?
+[2:49] PATIENT: Yes, please check Wednesday afternoon, September 2nd.

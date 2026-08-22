@@ -1,0 +1,27 @@
+Call: call-007
+Duration: 105s · Ended: stream_stopped
+
+[0:08] AGENT: This call may be recorded for quality and training purposes.
+[0:08] PATIENT: I understand, thanks.
+[0:11] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: English, please, thank you.
+[0:17] AGENT: You're already speaking with me in English.
+[0:18] PATIENT: Nicole Brooks, please.
+[0:19] AGENT: How can I help you today?
+[0:20] PATIENT: I need a refill for my omeprazol, please, by next week.
+[0:32] AGENT: I just need your first and last name.
+[0:32] PATIENT: Nicole Brooks, please.
+[0:45] AGENT: How can I help you today?
+[0:45] PATIENT: My date of birth is July 5, 1954, please.
+[0:58] AGENT: I don't see any medications on your chart that I can refill right now.
+[0:58] PATIENT: Could you please double‑check, I'm sure it's on file, please.
+[1:00] AGENT: If you'd like to speak with someone about this, just let me know.
+[1:01] PATIENT: Could you please double‑check the chart for omeprazol, please?
+[1:16] AGENT: If you want, I can connect you to our patient support team for more help.
+[1:17] PATIENT: Yes, please connect me, I really need that refill soon, please.
+[1:18] AGENT: Would you like to speak with them?
+[1:18] PATIENT: Yes, please.
+[1:28] AGENT: Transfer you now. Thank you.
+[1:29] PATIENT: Actually, one more thing, could you tell me how early I should arrive before my appointment, please?
+[1:33] AGENT: Goodbye.
+[1:34] PATIENT: Actually, one more thing, could you tell me how early I should arrive before my appointment, please.

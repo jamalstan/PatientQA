@@ -1,0 +1,22 @@
+Call: research10-03
+Duration: 185s · Ended: stream_stopped
+
+[0:23] AGENT: I just need your first and last name.
+[0:23] PATIENT: My name is Nicole Nelson.
+[0:37] AGENT: And your date of birth is July 4th, 2000 for demo purposes.
+[0:38] PATIENT: September fourth, nineteen seventy-five.
+[0:41] AGENT: How may I help you today?
+[0:41] PATIENT: I need to schedule my quarterly blood-pressure check.
+[0:55] AGENT: Just to confirm, this would be a general office visit for routine care. Is that correct?
+[0:56] PATIENT: Yes.
+[1:05] AGENT: Do you have a preferred provider for your appointment, or would you like to see the first available?
+[1:05] PATIENT: First available, please.
+[1:18] PATIENT: Hello? Are you still there?
+[1:22] AGENT: You already have an office visit scheduled for Monday, August 24th at 11:00 a.m. Since you can't book another of the same type right now, would you like to keep this appointment, reschedule it, or cancel it?
+[1:22] PATIENT: Reschedule it, please.
+[1:35] PATIENT: Hello? Are you still there?
+[2:19] AGENT: Yes, I'm here. I see your appointment is set for Monday, August 24th at 11:00 a.m. with Kelly Noble, MD at Nashville, 220 Athens Way. Can you tell me why you need to reschedule?
+[2:20] PATIENT: I'm running a bit behind schedule, so I'd like to move it.
+[2:40] AGENT: Mm-hmm ... 10:30 a.m. with Kelly Noble, MD at Nashville. Would you like to move your visit to that time, or would you prefer a different option?
+[3:00] AGENT: with Kelly Noble, MD at Nashville. Would you like to move your appointment to that time or hear other options?
+[3:01] PATIENT: Yes, please move it to that time.

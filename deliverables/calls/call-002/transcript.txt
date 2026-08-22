@@ -1,0 +1,31 @@
+Call: call-002
+Duration: 186s · Ended: max_duration
+
+[0:11] AGENT: Para español, oprima el dos.
+[0:12] PATIENT: Yes, that's fine.
+[0:22] AGENT: Would you like to create a demo patient profile? I just need your first and last name to get started.
+[0:22] PATIENT: Nicole Carter.
+[0:34] PATIENT: Hello? Are you still there?
+[0:34] AGENT: Your patient profile is set up, and your date of birth is July 4th, 2000 for demo purposes.
+[0:35] PATIENT: Actually, my birthday is November 2, 1975.
+[0:38] AGENT: How may I help you today?
+[0:38] PATIENT: I need a blood‑pressure check on the next federal holiday, please.
+[0:51] AGENT: Is that right?
+[0:52] PATIENT: Yes, that's right, I need that blood‑pressure check on the next federal holiday.
+[1:18] AGENT: There are no appointments available on Labor Day, but we do have several openings the next day, Tuesday, September 8th. Would you prefer a morning or afternoon slot?
+[1:19] PATIENT: Hmm, let me check my calendar… I think a morning slot would work.
+[1:36] AGENT: We have morning openings on Tuesday, September 8th, with Zbigniew Lukowski, MD. The first available is at 9:00 a.m. Would you like to book that time?
+[1:37] PATIENT: Yes, that works, thank you.
+[1:52] AGENT: Your appointment is set for Tuesday, September 8th at 9:00 a.m. with Zbigniew Lukowski, MD at Pivot Point Orthopedics.
+[1:53] PATIENT: Could you tell me what the copay is and if I pay at the desk or later?
+[1:59] AGENT: Is there anything else I can help you with?
+[2:00] PATIENT: Actually, could you read back the appointment details for me?
+[2:19] AGENT: Would you like a text message with these details?
+[2:19] PATIENT: Yes, please send a text, and could you let me know the copay and whether I pay at the desk or later?
+[2:36] PATIENT: Hello? Are you still there?
+[2:42] AGENT: Yes, I'm still here.
+[2:42] PATIENT: Sure, could you let me know the copay and whether I pay at the desk or later?
+[2:46] AGENT: I sent your appointment details by text.
+[2:47] PATIENT: Oh, and one more thing—if I'm running late, what should I do?
+[3:00] AGENT: I've sent your copay and payment question to the clinic support team. They'll get back to you as soon as possible.
+[3:00] PATIENT: Could you tell me the copay amount and whether I pay at the desk or later?

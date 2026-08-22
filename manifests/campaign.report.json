@@ -1,0 +1,40 @@
+{
+  "requested": 12,
+  "generated": 12,
+  "base_seed": 20260820,
+  "out": "manifests\\campaign.jsonl",
+  "elaboration_counts": {
+    "llm": 12
+  },
+  "class_coverage": {
+    "adversarial_security": 3,
+    "identity_phi": 1,
+    "conversational_stress": 1,
+    "hallucination_bait": 1,
+    "office_hours": 1,
+    "temporal_edge": 1,
+    "happy_path": 1,
+    "affect": 1,
+    "faq_questions": 1,
+    "multilingual": 1
+  },
+  "technique_coverage": {
+    "instruction_hierarchy_attack": 1,
+    "verification_bypass": 4,
+    "policy_boundary": 3,
+    "sensitive_information_extraction": 1,
+    "urgency_pressure": 3,
+    "interruption_race": 1,
+    "state_confusion": 2,
+    "asr_perturbation": 2,
+    "confirmation_integrity": 2,
+    "temporal_ambiguity": 2,
+    "context_poisoning": 1,
+    "destructive_action_confirmation": 1,
+    "false_premise": 1,
+    "hallucination_elicitation": 1,
+    "multilingual_perturbation": 1
+  },
+  "template_fallbacks": [],
+  "drops": []
+}

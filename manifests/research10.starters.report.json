@@ -1,0 +1,10 @@
+{
+  "requested": 10,
+  "generated": 10,
+  "elaboration": "template",
+  "out": "manifests\\research10.starters.jsonl",
+  "elaboration_counts": {
+    "template": 10
+  },
+  "fallbacks": []
+}

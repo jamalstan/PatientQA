@@ -1,0 +1,18 @@
+{
+  "campaign": "high_value_research_10",
+  "base_seed": 20260820,
+  "generated": 10,
+  "one_behavior_per_call": true,
+  "behaviors": [
+    "clean_scheduling_baseline",
+    "self_correction_once",
+    "long_silence",
+    "barge_in",
+    "backchannel_during_readback",
+    "third_party_interruption",
+    "degraded_audio_digits",
+    "spanish_heavy_call",
+    "cancel_reschedule_rollback",
+    "refuse_dob"
+  ]
+}

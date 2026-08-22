@@ -1,0 +1,10 @@
+{
+  "requested": 60,
+  "generated": 60,
+  "elaboration": "template",
+  "out": "manifests\\example.starters.jsonl",
+  "elaboration_counts": {
+    "template": 60
+  },
+  "fallbacks": []
+}

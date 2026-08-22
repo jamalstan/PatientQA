@@ -1,0 +1,28 @@
+{"style": "hedging", "language_tag": "english", "text": "I don't know if this is worth bothering the doctor about, but it keeps coming back, so..."}
+{"style": "hedging", "language_tag": "english", "text": "It's probably nothing, my daughter made me call."}
+{"style": "minimizing", "language_tag": "english", "text": "It's not a big deal, it comes and goes. I just need the usual appointment."}
+{"style": "vague_timing", "language_tag": "english", "text": "I saw somebody about this a while back... some time last month, I think? Maybe the month before."}
+{"style": "vague_timing", "language_tag": "english", "text": "The doctor said to come back in a bit — I wrote it down somewhere."}
+{"style": "precise", "language_tag": "english", "text": "I take the metformin 500 twice a day, morning and evening, and the blood-pressure one with lunch."}
+{"style": "precise", "language_tag": "english", "text": "Last visit was June 3rd at 10:15 with the nurse practitioner, same as always."}
+{"style": "asks_to_repeat", "language_tag": "english", "text": "Sorry, say that again? You're cutting out. Is that Tuesday the 9th or the 8th?"}
+{"style": "asks_to_repeat", "language_tag": "english", "text": "Slow down for me, honey — was that nine-oh-five or five-oh-nine?"}
+{"style": "self_diagnosis", "language_tag": "english", "text": "I looked it up and I'm pretty sure it's my thyroid acting up again, same as my sister had."}
+{"style": "self_diagnosis", "language_tag": "english", "text": "I think the pill is doing it — I read the flyer that came with the box."}
+{"style": "deferential", "language_tag": "english", "text": "Whatever the doctor thinks is best, I don't want to make extra work for you."}
+{"style": "deferential", "language_tag": "english", "text": "You folks know better than me — I'll take whatever's open."}
+{"style": "scattered", "language_tag": "english", "text": "Oh — before I forget, did I mention the other thing? No? Hold on, let me find my glasses."}
+{"style": "scattered", "language_tag": "english", "text": "Wait, which appointment is this for again? I have the card somewhere... it's in the kitchen."}
+{"style": "insistent", "language_tag": "english", "text": "I need the morning slot, I've told the last three people: mornings only, before eleven."}
+{"style": "insistent", "language_tag": "english", "text": "I'm not explaining the whole thing again — it's all in your computer."}
+{"style": "laconic", "language_tag": "english", "text": "Appointment. Thursday. The earlier the better."}
+{"style": "laconic", "language_tag": "english", "text": "Yes. No. That date's fine."}
+{"style": "polite_chatty", "language_tag": "english", "text": "How are you today? I hope I'm not calling at a bad time — I always say, if you don't ask, you don't get."}
+{"style": "polite_chatty", "language_tag": "english", "text": "Oh lovely, a real person! You'd be surprised how hard it is to reach you folks."}
+{"style": "confused_terms", "language_tag": "english", "text": "The heart doctor... no, the sugar doctor. The one that took my blood last time."}
+{"style": "confused_terms", "language_tag": "english", "text": "My pill box says one thing and the bottle says another, so I take both. Better safe."}
+{"style": "spanish_interleave", "language_tag": "spanish", "text": "La metformina, you know, the sugar medicine — I take it con el desayuno."}
+{"style": "spanish_interleave", "language_tag": "spanish", "text": "Ay, espérate — the appointment is for my corazón? No, no, for the knees, las rodillas."}
+{"style": "spanish_interleave", "language_tag": "spanish", "text": "My son usually helps me with this, he translates, pero hoy no está. Let's try."}
+{"style": "spanish_heavy", "language_tag": "spanish", "text": "Bueno, necesito una cita con el doctor, para la próxima semana si se puede."}
+{"style": "spanish_heavy", "language_tag": "spanish", "text": "¿Cómo dice? ¿Martes o jueves? El jueves está bien, temprano."}

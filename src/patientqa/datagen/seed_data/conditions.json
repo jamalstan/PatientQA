@@ -1,0 +1,269 @@
+{
+  "$comment": "Condition clusters: realistic chronic-condition bundles used as persona seeds. Written as original synthetic content for this project (DESIGN.md 6.2: HF datasets are seeds, and we only vendor rows whose license is verified; these rows are ours, authored in the style of PMC-Patients case summaries). medications are cross-checked against drugs.json by tests.",
+  "clusters": [
+    {
+      "key": "type2_diabetes_htn",
+      "conditions": ["type 2 diabetes", "high blood pressure"],
+      "medications": ["metformin", "lisinopril"],
+      "specialty": "endocrinology",
+      "cadence": "quarterly check-ins",
+      "min_age": 45,
+      "max_age": 100,
+      "gender": null,
+      "weight": 1.2
+    },
+    {
+      "key": "type1_diabetes",
+      "conditions": ["type 1 diabetes"],
+      "medications": ["insulin glargine"],
+      "specialty": "endocrinology",
+      "cadence": "every-three-month A1c visits",
+      "min_age": 18,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.5
+    },
+    {
+      "key": "atrial_fib",
+      "conditions": ["atrial fibrillation"],
+      "medications": ["apixaban", "metoprolol"],
+      "specialty": "cardiology",
+      "cadence": "twice-yearly cardiology visits",
+      "min_age": 55,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.8
+    },
+    {
+      "key": "heart_failure",
+      "conditions": ["congestive heart failure"],
+      "medications": ["furosemide", "carvedilol"],
+      "specialty": "cardiology",
+      "cadence": "monthly nurse visits",
+      "min_age": 60,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.5
+    },
+    {
+      "key": "hyperlipidemia",
+      "conditions": ["high cholesterol"],
+      "medications": ["atorvastatin"],
+      "specialty": "cardiology",
+      "cadence": "annual lipid panels",
+      "min_age": 40,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.9
+    },
+    {
+      "key": "copd",
+      "conditions": ["COPD"],
+      "medications": ["tiotropium", "albuterol"],
+      "specialty": "pulmonology",
+      "cadence": "quarterly lung checks",
+      "min_age": 50,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.7
+    },
+    {
+      "key": "asthma",
+      "conditions": ["mild asthma"],
+      "medications": ["albuterol", "fluticasone"],
+      "specialty": "pulmonology",
+      "cadence": "annual asthma reviews",
+      "min_age": 18,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.8
+    },
+    {
+      "key": "osteoarthritis",
+      "conditions": ["knee osteoarthritis"],
+      "medications": ["naproxen"],
+      "specialty": "orthopedics",
+      "cadence": "every-six-month follow-ups",
+      "min_age": 50,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.8
+    },
+    {
+      "key": "osteoporosis",
+      "conditions": ["osteoporosis"],
+      "medications": ["alendronate"],
+      "specialty": "rheumatology",
+      "cadence": "bone-density follow-ups",
+      "min_age": 60,
+      "max_age": 100,
+      "gender": "female",
+      "weight": 0.5
+    },
+    {
+      "key": "hypothyroidism",
+      "conditions": ["hypothyroidism"],
+      "medications": ["levothyroxine"],
+      "specialty": "endocrinology",
+      "cadence": "semi-annual thyroid checks",
+      "min_age": 30,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.8
+    },
+    {
+      "key": "ckd_stage3",
+      "conditions": ["stage-3 chronic kidney disease"],
+      "medications": ["lisinopril", "furosemide"],
+      "specialty": "nephrology",
+      "cadence": "quarterly lab visits",
+      "min_age": 55,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.5
+    },
+    {
+      "key": "gout",
+      "conditions": ["gout"],
+      "medications": ["allopurinol"],
+      "specialty": "rheumatology",
+      "cadence": "flare follow-ups",
+      "min_age": 40,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.5
+    },
+    {
+      "key": "gerd",
+      "conditions": ["acid reflux"],
+      "medications": ["omeprazole"],
+      "specialty": "gastroenterology",
+      "cadence": "annual check-ins",
+      "min_age": 25,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.7
+    },
+    {
+      "key": "migraine",
+      "conditions": ["chronic migraines"],
+      "medications": ["sumatriptan"],
+      "specialty": "neurology",
+      "cadence": "quarterly follow-ups",
+      "min_age": 18,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.7
+    },
+    {
+      "key": "anxiety_depression",
+      "conditions": ["anxiety and depression"],
+      "medications": ["sertraline"],
+      "specialty": "behavioral health",
+      "cadence": "monthly medication visits",
+      "min_age": 18,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.8
+    },
+    {
+      "key": "adhd",
+      "conditions": ["ADHD"],
+      "medications": ["methylphenidate"],
+      "specialty": "behavioral health",
+      "cadence": "monthly stimulant follow-ups",
+      "min_age": 18,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.5
+    },
+    {
+      "key": "hypertension_early",
+      "conditions": ["high blood pressure"],
+      "medications": ["losartan"],
+      "specialty": "primary care",
+      "cadence": "quarterly blood-pressure checks",
+      "min_age": 30,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.7
+    },
+    {
+      "key": "glaucoma",
+      "conditions": ["glaucoma"],
+      "medications": ["latanoprost"],
+      "specialty": "ophthalmology",
+      "cadence": "quarterly eye-pressure checks",
+      "min_age": 55,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.4
+    },
+    {
+      "key": "breast_cancer_followup",
+      "conditions": ["breast cancer in remission"],
+      "medications": ["anastrozole"],
+      "specialty": "oncology",
+      "cadence": "semi-annual follow-up visits",
+      "min_age": 40,
+      "max_age": 100,
+      "gender": "female",
+      "weight": 0.4
+    },
+    {
+      "key": "prostate_followup",
+      "conditions": ["an enlarged prostate"],
+      "medications": ["tamsulosin"],
+      "specialty": "urology",
+      "cadence": "annual prostate exams",
+      "min_age": 55,
+      "max_age": 100,
+      "gender": "male",
+      "weight": 0.5
+    },
+    {
+      "key": "prenatal",
+      "conditions": ["pregnancy, second trimester"],
+      "medications": ["prenatal vitamins"],
+      "specialty": "OB-GYN",
+      "cadence": "monthly prenatal visits",
+      "min_age": 21,
+      "max_age": 44,
+      "gender": "female",
+      "weight": 0.4
+    },
+    {
+      "key": "sports_injury",
+      "conditions": ["a knee sprain from rec-league soccer"],
+      "medications": ["ibuprofen"],
+      "specialty": "orthopedics",
+      "cadence": "a follow-up after the two-week mark",
+      "min_age": 18,
+      "max_age": 45,
+      "gender": null,
+      "weight": 0.6
+    },
+    {
+      "key": "acne",
+      "conditions": ["acne"],
+      "medications": ["tretinoin"],
+      "specialty": "dermatology",
+      "cadence": "eight-week check-ins",
+      "min_age": 18,
+      "max_age": 35,
+      "gender": null,
+      "weight": 0.4
+    },
+    {
+      "key": "seasonal_allergies",
+      "conditions": ["seasonal allergies"],
+      "medications": ["cetirizine"],
+      "specialty": "primary care",
+      "cadence": "annual visits before spring",
+      "min_age": 18,
+      "max_age": 100,
+      "gender": null,
+      "weight": 0.6
+    }
+  ]
+}

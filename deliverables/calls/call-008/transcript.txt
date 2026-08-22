@@ -1,0 +1,29 @@
+Call: call-008
+Duration: 186s · Ended: max_duration
+
+[0:08] AGENT: This call may be recorded for quality and training purposes.
+[0:11] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: English please.
+[0:19] AGENT: How can I help you today?
+[0:19] PATIENT: I need to update my callback number to five five five three two one zero.
+[0:31] AGENT: I have your number as 555-3210. Is that correct?
+[0:31] PATIENT: Yes, that's correct.
+[0:42] AGENT: Your callback number is updated to 555-3210. What else can I help you with today?
+[0:42] PATIENT: Oh, and one more thing.
+[0:47] AGENT: Go ahead.
+[0:48] PATIENT: Could you also send a text confirmation and a reminder call?
+[0:51] AGENT: What else do you need?
+[0:52] PATIENT: Do I need to fast or stop any medication before the bloodwork?
+[1:25] AGENT: Are you still there?
+[1:25] PATIENT: Yes, I'm here.
+[1:36] AGENT: Thanks for confirming. For your blood work, do you know which tests you're scheduled for, or should I check the general guidelines?
+[1:36] PATIENT: Just the routine blood work, please.
+[1:48] AGENT: For most routine blood work, fasting for eight to 12 hours is often recommended, but it depends on the specific test.
+[2:00] AGENT: Is there anything else you'd like help with?
+[2:00] PATIENT: What should I bring to the visit, and is there paperwork to fill out?
+[2:20] AGENT: For your visit, bring a photo ID, insurance card if you have one, and a list of your current medications. Most clinics have some paperwork to fill out, so arriving a bit early is helpful. Anything else you'd like to know?
+[2:21] PATIENT: Actually, one more thing. My pharmacy changed to the downtown location, please send refills there from now on.
+[2:41] AGENT: I'll update your pharmacy to the downtown location for future refills. Is there a specific pharmacy name or address for the downtown location, or should I use the main downtown pharmacy?
+[2:42] PATIENT: The pharmacy is Downtown Pharmacy on Main Street, number one two three Main.
+[2:58] AGENT: Is there anything else you'd like to update or ask about?
+[2:58] PATIENT: No, that's everything. Thank you, goodbye.

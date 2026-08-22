@@ -1,0 +1,56 @@
+{
+  "$comment": "Name pools. Entirely fictional combinations; generated personas are explicitly synthetic characters with no real identities (DESIGN.md 6.2 caveats). Hispanic pools are drawn when the persona's language profile is Spanish-influenced, so name, language, and voice description stay coherent.",
+  "first_female": [
+    "Margaret", "Dorothy", "Helen", "Barbara", "Patricia", "Jennifer", "Linda", "Elizabeth",
+    "Susan", "Karen", "Sarah", "Nancy", "Lisa", "Betty", "Sandra", "Ashley", "Emily", "Emma",
+    "Olivia", "Grace", "Hannah", "Rachel", "Megan", "Lauren", "Amber", "Danielle", "Brittany",
+    "Nicole", "Alicia", "Heather", "Victoria", "Kathleen", "Diane", "Carol", "Ruth", "Sharon",
+    "Michelle", "Amanda", "Katherine", "Ann", "Julie", "Joyce", "Judith", "Christine", "Marie",
+    "Frances", "Andrea", "Diana", "Chloe", "Abigail"
+  ],
+  "first_male": [
+    "James", "Robert", "John", "Michael", "William", "David", "Richard", "Joseph", "Thomas",
+    "Charles", "Christopher", "Daniel", "Matthew", "Anthony", "Mark", "Steven", "Andrew", "Paul",
+    "Joshua", "Kenneth", "Kevin", "Brian", "George", "Timothy", "Ronald", "Jason", "Edward",
+    "Jeffrey", "Ryan", "Jacob", "Gary", "Nicholas", "Eric", "Jonathan", "Stephen", "Larry",
+    "Justin", "Scott", "Brandon", "Benjamin", "Samuel", "Gregory", "Frank", "Alexander",
+    "Raymond", "Patrick", "Jack", "Dennis", "Tyler", "Aaron", "Nathan", "Henry", "Zachary",
+    "Douglas", "Peter", "Kyle", "Noah", "Ethan", "Walter", "Keith", "Roger", "Terry", "Austin"
+  ],
+  "first_nonbinary": [
+    "Alex", "Jordan", "Sam", "Casey", "Jamie", "Robin", "Morgan", "Taylor", "Rene", "Angel",
+    "Devon", "Skyler"
+  ],
+  "first_hispanic_female": [
+    "Marta", "Lucia", "Carmen", "Gloria", "Maria", "Rosa", "Isabel", "Ana", "Sofia", "Elena",
+    "Adriana", "Daniela", "Valeria", "Camila", "Guadalupe", "Estela", "Nilda", "Iris", "Yolanda",
+    "Pilar"
+  ],
+  "first_hispanic_male": [
+    "Jose", "Miguel", "Carlos", "Luis", "Jorge", "Rafael", "Alejandro", "Francisco", "Antonio",
+    "Eduardo", "Pablo", "Hector", "Marco", "Diego", "Ernesto", "Ramiro", "Federico", "Andres",
+    "Tomas", "Julio"
+  ],
+  "last_general": [
+    "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Wilson", "Anderson",
+    "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White", "Harris",
+    "Clark", "Lewis", "Robinson", "Walker", "Young", "Allen", "King", "Wright", "Scott", "Nguyen",
+    "Hill", "Green", "Adams", "Nelson", "Baker", "Hall", "Campbell", "Mitchell", "Carter",
+    "Roberts", "Turner", "Phillips", "Evans", "Parker", "Edwards", "Collins", "Stewart", "Morris",
+    "Rogers", "Reed", "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Cooper", "Richardson",
+    "Cox", "Howard", "Ward", "Peterson", "Gray", "Watson", "Brooks", "Kelly", "Sanders", "Price",
+    "Bennett", "Wood", "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell", "Long",
+    "Patterson", "Hughes", "Washington", "Butler", "Simmons", "Foster", "Bryant", "Alexander",
+    "Russell", "Griffin", "Hayes", "Myers"
+  ],
+  "last_hispanic": [
+    "Reyes", "Garcia", "Martinez", "Rodriguez", "Hernandez", "Lopez", "Gonzalez", "Perez",
+    "Sanchez", "Ramirez", "Torres", "Flores", "Rivera", "Castillo", "Ortiz", "Gutierrez",
+    "Chavez", "Vargas", "Mendez", "Morales", "Delgado", "Fuentes", "Navarro", "Aguilar",
+    "Carrasco", "Espinosa", "Salazar", "Soto", "Marquez", "Vega", "Rojas", "Pena", "Herrera"
+  ],
+  "heritage": [
+    "Cuban-American", "Mexican-American", "Puerto Rican", "Dominican-American",
+    "Colombian-American", "Salvadoran-American", "Guatemalan-American"
+  ]
+}

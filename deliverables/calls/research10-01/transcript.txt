@@ -1,0 +1,27 @@
+Call: research10-01
+Duration: 186s · Ended: stream_stopped
+
+[0:20] AGENT: Would you like to create a demo patient profile? I just need your first and last name to get started.
+[0:21] PATIENT: My name is Brandon King.
+[0:34] PATIENT: Hello? Are you still there?
+[0:39] AGENT: Your patient profile has been created, and your date of birth is July 4th, 2000 for demo purposes.
+[0:40] PATIENT: No, my date of birth is September twelfth, nineteen sixty-five.
+[0:54] AGENT: What can I help you with today?
+[0:55] PATIENT: I need to schedule a routine behavioral health appointment for next week, preferably a late‑morning slot.
+[1:12] AGENT: If you meant something different, let me know a bit more about the appointment you need.
+[1:13] PATIENT: I need a routine behavioral health visit, a medication check, late‑morning next week.
+[1:26] AGENT: Do you have a preferred provider for your behavioral health medication check, or would you like to see the first available?
+[1:27] PATIENT: First available, please.
+[1:48] AGENT: Would you like to keep this appointment, reschedule it, or cancel it and book a new one?
+[1:48] PATIENT: Cancel that one and book a new late‑morning slot for next week.
+[2:02] PATIENT: Hello? Are you still there?
+[2:05] AGENT: Can you share the reason for canceling your appointment with Dr. Zbigniew Lukowski on Monday, August 24th?
+[2:05] PATIENT: I need to cancel to get a new late‑morning slot next week.
+[2:20] AGENT: Just to confirm, you want to cancel your appointment with Dr. Zidnu Lukoski on Monday, August 24th?
+[2:20] PATIENT: No, Dr. Zbigniew Lukowski on Monday, August 24th.
+[2:24] AGENT: Is that correct?
+[2:25] PATIENT: No, Dr. Zbigniew Lukowski on Monday, August twenty-fourth.
+[2:40] AGENT: I will cancel your appointment with Dr. Zigmew Lukowski on Monday, August 24th.
+[2:40] PATIENT: Please book a new late‑morning appointment for next week.
+[2:59] AGENT: Would you like an appointment at 10:30 a.m., 11:00 a.m., or 11:30 a.m. on Monday, August 24th with Dr. Kelly Noble?
+[3:00] PATIENT: 11:00 a.m. works for me.

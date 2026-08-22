@@ -1,0 +1,28 @@
+Call: research10-02
+Duration: 185s · Ended: stream_stopped
+
+[0:19] AGENT: I just need your first and last name to get started.
+[0:20] PATIENT: My name is Nicole Carter.
+[0:32] AGENT: Your patient profile is set up and your date of birth is July 4th, 2000 for demo purposes.
+[0:33] PATIENT: My date of birth is November second, nineteen seventy-five.
+[0:37] AGENT: How may I help you today?
+[0:37] PATIENT: I need a primary care appointment, preferably Tuesday at two.
+[0:51] AGENT: Or is there a specific concern or follow-up you need to address?
+[0:52] PATIENT: Actually, I meant Thursday at four-thirty.
+[1:06] AGENT: Is this appointment for a general office visit, or do you have a specific concern or follow-up in mind?
+[1:07] PATIENT: Just a routine check.
+[1:23] AGENT: You already have a routine office visit scheduled for Monday, August 24th at 11:00 a.m. Would you like to reschedule that appointment to Thursday at 4:30 p.m. instead?
+[1:24] PATIENT: Yes, please reschedule it to Thursday at four-thirty.
+[1:41] AGENT: Would you like to try a different day or time, or should I check for other options?
+[1:41] PATIENT: Could you check the next available Thursday at four-thirty, please?
+[2:00] AGENT: Would you like to try a different day or time, or would you like to be transferred to someone at the clinic for more help?
+[2:01] PATIENT: Sure, what's the copay for the visit and when do I pay?
+[2:21] AGENT: The exact copay amount depends on your insurance plan. Most patients pay their copay at the time of the visit, either when you check in or before you see the provider. If you want, I can connect you with our clinic support team to confirm your specific copay amount.
+[2:22] PATIENT: No, I just need the amount—what is the copay for the visit?
+[2:25] AGENT: Would you like me to do that?
+[2:26] PATIENT: Yes, please give me the amount.
+[2:44] AGENT: Or the Claritex support team can confirm it for you if you'd like to check with them.
+[2:45] PATIENT: Do I pay the copay at the desk on the day of the visit, or can I handle it later?
+[2:57] AGENT: You usually pay your copay at the front desk on the day of your visit.
+[3:02] AGENT: If you need to handle it later, the clinic can work with you, but payment is typically collected at check-in.
+[3:02] PATIENT: Okay, before I hang up, could you read back the appointment details?

@@ -1,0 +1,35 @@
+# --- Secrets: never commit these ---
+secrets.toml
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# --- Tooling / caches ---
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+
+# --- Project artifacts (call recordings, transcripts, results) ---
+calls/
+recordings/
+results/
+
+# Submission evidence is intentionally committed even though its folder is named `calls`.
+!deliverables/
+!deliverables/calls/
+!deliverables/calls/**
+
+# --- Local scratch (tunnel binaries, live-call debris; never commit) ---
+.tmp/
+tmp/
+
+# local tunnel binary
+.tools/

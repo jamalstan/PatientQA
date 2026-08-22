@@ -1,0 +1,31 @@
+Call: call-003
+Duration: 186s · Ended: max_duration
+
+[0:11] AGENT: Para español, oprima el dos.
+[0:11] PATIENT: Yes, I understand.
+[0:20] AGENT: Would you like to create a demo patient profile?
+[0:20] PATIENT: No, thank you.
+[0:22] AGENT: I just need your first and last name to get started.
+[0:23] PATIENT: Iris Rojas.
+[0:25] AGENT: Nope.
+[0:25] PATIENT: What do you need from me?
+[0:40] AGENT: I just need your first and last name to create your demo patient profile. You already provided Widest Rojas. Let me set up your profile now.
+[0:48] AGENT: How may I help you today?
+[0:48] PATIENT: I need to schedule my semi‑annual thyroid check, maybe for last week if possible.
+[1:02] AGENT: Just to confirm, you'd like to schedule a general office visit for your semi-annual thyroid check. Is that right?
+[1:03] PATIENT: Yes, that's right, I need that appointment as soon as possible, maybe even if it was supposed to be last week.
+[1:25] AGENT: You already have an office visit scheduled for Tuesday, September 8th at 9:00 a.m. Would you like to move this appointment to an earlier date, or do you want to keep it as is?
+[1:25] PATIENT: Sí, por favor, me gustaría moverlo a la semana pasada, si hay alguna hora disponible.
+[1:38] AGENT: Would you like me to look for an earlier appointment and reschedule your visit?
+[1:38] PATIENT: Sí, por favor, revisa si hay alguna hora disponible la semana pasada.
+[1:53] PATIENT: Hello? Are you still there?
+[1:55] AGENT: You have an office visit scheduled for Tuesday, September 8th at 9:00 a.m. with Dr. Zigmew Lukowski.
+[1:55] PATIENT: Could you see if there was any opening last week, like August 21?
+[2:16] AGENT: The earliest opening I found is for tomorrow, Thursday, August 20th at 9:00 a.m. in Nashville with Dr. Zigmew Lukowski. Would you like to move your appointment to this time?
+[2:16] PATIENT: Yes, that works, thank you.
+[2:28] AGENT: For example, is it a schedule conflict, illness, or something else?
+[2:29] PATIENT: Just need the thyroid check; I missed last week's slot.
+[2:44] AGENT: Thanks for letting me know. To confirm, you want to move your appointment to Thursday, August 20th at 9:00 a.m. in Nashville with Doctors at New Lukoske.
+[2:44] PATIENT: Sí, confirmemos ese horario. Oh, and one more thing, could I get a refill for my levothyroxine?
+[2:50] AGENT: Is that correct?
+[2:50] PATIENT: Yes, that's correct.

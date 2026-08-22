@@ -1,0 +1,10 @@
+{
+  "requested": 12,
+  "generated": 12,
+  "elaboration": "auto",
+  "out": "manifests\\campaign.starters.jsonl",
+  "elaboration_counts": {
+    "llm": 12
+  },
+  "fallbacks": []
+}

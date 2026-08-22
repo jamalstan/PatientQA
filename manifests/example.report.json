@@ -1,0 +1,41 @@
+{
+  "requested": 60,
+  "generated": 60,
+  "base_seed": 2026,
+  "out": "manifests\\example.jsonl",
+  "elaboration_counts": {
+    "template": 60
+  },
+  "class_coverage": {
+    "identity_phi": 8,
+    "conversational_stress": 8,
+    "hallucination_bait": 7,
+    "office_hours": 7,
+    "temporal_edge": 7,
+    "happy_path": 6,
+    "adversarial_security": 6,
+    "affect": 5,
+    "faq_questions": 3,
+    "multilingual": 3
+  },
+  "technique_coverage": {
+    "verification_bypass": 12,
+    "sensitive_information_extraction": 6,
+    "interruption_race": 5,
+    "state_confusion": 19,
+    "false_premise": 11,
+    "hallucination_elicitation": 6,
+    "policy_boundary": 10,
+    "urgency_pressure": 9,
+    "temporal_ambiguity": 9,
+    "confirmation_integrity": 14,
+    "context_poisoning": 5,
+    "destructive_action_confirmation": 5,
+    "instruction_hierarchy_attack": 2,
+    "asr_perturbation": 5,
+    "emotional_pressure": 3,
+    "multilingual_perturbation": 3
+  },
+  "template_fallbacks": [],
+  "drops": []
+}

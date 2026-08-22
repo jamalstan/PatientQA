@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>PatientQA — Call Viewer</title>
+<style>
+  :root {
+    --bg: #0b0f17;
+    --panel: #111827;
+    --panel-2: #0d1420;
+    --border: #1f2b3d;
+    --border-soft: #182335;
+    --text: #dbe4f0;
+    --muted: #8296b0;
+    --faint: #5b6c84;
+    --agent: #58a6ff;
+    --patient: #bc8cff;
+    --good: #3fb950;
+    --warn: #d29922;
+    --bad: #f85149;
+    --accent: #58a6ff;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #14213a 0%, transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, #131a2e 0%, transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13, 20, 32, 0.85);
+    backdrop-filter: blur(6px);
+    position: sticky; top: 0; z-index: 20;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; font-weight: 650; font-size: 16px; }
+  .brand .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--agent), var(--patient));
+    display: inline-block; margin-right: 2px;
+  }
+  .brand .sub { color: var(--muted); font-weight: 400; font-size: 13px; }
+  .load-actions { display: flex; gap: 8px; }
+  button {
+    font: inherit; color: var(--text); background: var(--panel);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 14px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: #1f6feb33; border-color: #2f81f7; }
+  .hint { color: var(--faint); font-size: 12px; }
+
+  /* ---------- layout ---------- */
+  #app { display: grid; grid-template-columns: 264px 1fr; min-height: calc(100vh - 53px); }
+  #sidebar {
+    border-right: 1px solid var(--border);
+    padding: 14px 10px; background: rgba(13, 20, 32, 0.5);
+    min-width: 0;
+  }
+  .side-title {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px;
+    color: var(--faint); padding: 0 8px 8px;
+  }
+  .call-item {
+    padding: 9px 10px; border-radius: 8px; cursor: pointer;
+    border: 1px solid transparent; margin-bottom: 4px; min-width: 0;
+  }
+  .call-item:hover { background: var(--panel-2); }
+  .call-item.active { background: var(--panel); border-color: var(--border); }
+  .call-item .cid { font-family: var(--mono); font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .call-item .who { color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .call-item .row2 { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+
+  #content { padding: 18px 22px 60px; min-width: 0; }
+  .card {
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    min-width: 0;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 1080px) { .grid2 { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { #app { grid-template-columns: 1fr; } #sidebar { display: none; } }
+  h3.card-title {
+    margin: 0 0 10px; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); font-weight: 650;
+  }
+
+  /* ---------- chips / badges ---------- */
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--panel-2); border: 1px solid var(--border);
+    color: var(--muted); border-radius: 999px;
+    font-size: 11.5px; padding: 2px 9px; margin: 2px 4px 2px 0;
+    white-space: nowrap;
+  }
+  .chip b { color: var(--text); font-weight: 600; }
+  .badge { border-radius: 999px; font-size: 10.5px; padding: 2px 8px; font-weight: 650; letter-spacing: 0.02em; }
+  .badge.ok      { background: #3fb95026; color: #56d364; border: 1px solid #3fb95055; }
+  .badge.timeout { background: #d2992226; color: #e3b341; border: 1px solid #d2992255; }
+  .badge.bad     { background: #f8514926; color: #ff7b72; border: 1px solid #f8514955; }
+  .badge.neutral { background: #8b949e26; color: #adbac7; border: 1px solid #8b949e55; }
+  .pill { font-family: var(--mono); font-size: 10.5px; border-radius: 999px; padding: 1px 7px; }
+  .pill.ok   { background: #3fb95022; color: #56d364; }
+  .pill.warn { background: #d2992222; color: #e3b341; }
+  .pill.bad  { background: #f8514922; color: #ff7b72; }
+
+  /* ---------- call header ---------- */
+  .call-header-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .call-id { font-family: var(--mono); font-size: 17px; font-weight: 650; }
+  .call-header-top .spacer { flex: 1; }
+  .persona-line { color: var(--muted); margin-bottom: 10px; }
+  .stats-row { display: flex; flex-wrap: wrap; gap: 0; }
+  .stat { padding: 4px 18px 4px 0; margin-right: 18px; border-right: 1px solid var(--border-soft); }
+  .stat:last-child { border-right: none; }
+  .stat .v { font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .kv { display: grid; grid-template-columns: 130px 1fr; gap: 4px 12px; font-size: 13px; }
+  .kv .k { color: var(--faint); }
+  .kv .v { color: var(--text); min-width: 0; overflow-wrap: anywhere; }
+  ul.plain { margin: 2px 0; padding-left: 18px; }
+  ul.plain li { margin: 2px 0; color: var(--text); }
+  .muted { color: var(--muted); }
+
+  /* ---------- player ---------- */
+  .player-top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
+  audio { width: 100%; max-width: 560px; height: 36px; }
+  #timeLabel { font-family: var(--mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  #wave {
+    width: 100%; height: 96px; display: block; border-radius: 8px;
+    background: var(--panel-2); border: 1px solid var(--border-soft);
+    cursor: crosshair;
+  }
+  .legend { display: flex; gap: 16px; margin-top: 8px; color: var(--muted); font-size: 12px; }
+  .legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .no-audio { color: var(--faint); font-style: italic; padding: 18px 0; text-align: center; }
+
+  /* ---------- transcript ---------- */
+  #transcript { display: flex; flex-direction: column; gap: 10px; max-height: 640px; overflow-y: auto; padding: 4px 6px 4px 2px; }
+  .turn { display: flex; flex-direction: column; max-width: 88%; cursor: pointer; border: 1px solid transparent; border-radius: 10px; padding: 7px 11px; }
+  .turn.agent   { align-self: flex-start; background: #58a6ff14; border-color: #58a6ff33; }
+  .turn.patient { align-self: flex-end;   background: #bc8cff14; border-color: #bc8cff33; }
+  .turn:hover { border-color: var(--agent); }
+  .turn.patient:hover { border-color: var(--patient); }
+  .turn.active { outline: 2px solid #58a6ff66; background: #58a6ff22; }
+  .turn.patient.active { outline: 2px solid #bc8cff66; background: #bc8cff22; }
+  .turn .meta { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: var(--faint); margin-bottom: 3px; font-family: var(--mono); }
+  .turn .who { font-weight: 700; letter-spacing: 0.05em; }
+  .turn.agent .who { color: var(--agent); }
+  .turn.patient .who { color: var(--patient); }
+  .turn .text { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  /* ---------- timeline ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; align-items: center; }
+  .fchip {
+    font-size: 11px; font-family: var(--mono); cursor: pointer; user-select: none;
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px;
+    color: var(--muted); background: var(--panel-2);
+  }
+  .fchip.off { opacity: 0.35; text-decoration: line-through; }
+  #search {
+    flex: 1; min-width: 140px; background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font: inherit; font-size: 12.5px;
+  }
+  #search:focus { outline: none; border-color: var(--accent); }
+  #timeline { max-height: 640px; overflow-y: auto; }
+  .ev { display: grid; grid-template-columns: 62px 110px 1fr; gap: 10px; padding: 5px 8px; border-radius: 8px; cursor: pointer; border-bottom: 1px solid var(--border-soft); align-items: baseline; }
+  .ev:hover { background: var(--panel-2); }
+  .ev .t { font-family: var(--mono); font-size: 11.5px; color: var(--faint); text-align: right; font-variant-numeric: tabular-nums; }
+  .ev .type { font-family: var(--mono); font-size: 11px; padding: 1px 8px; border-radius: 999px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ev .summary { font-size: 12.5px; color: var(--text); min-width: 0; overflow-wrap: anywhere; }
+  .ev .summary .muted { color: var(--muted); }
+  .ev details { grid-column: 1 / -1; margin-top: 2px; }
+  .ev summary { color: var(--faint); font-size: 11px; cursor: default; }
+  .ev pre {
+    margin: 4px 0 6px; padding: 8px 10px; background: #0a0e16; border: 1px solid var(--border-soft);
+    border-radius: 6px; font-family: var(--mono); font-size: 11px; color: #9fb4cd;
+    overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+
+  /* ---------- empty state / overlay ---------- */
+  #empty { max-width: 640px; margin: 9vh auto; text-align: center; color: var(--muted); }
+  #empty .big { font-size: 19px; color: var(--text); font-weight: 650; margin-bottom: 8px; }
+  #empty .glyph { font-size: 44px; margin-bottom: 14px; }
+  #empty ol { text-align: left; display: inline-block; margin: 18px 0; color: var(--muted); }
+  #empty code { font-family: var(--mono); background: var(--panel); border: 1px solid var(--border); padding: 1px 6px; border-radius: 6px; font-size: 12px; color: var(--text); }
+  #dropOverlay {
+    position: fixed; inset: 0; z-index: 100; display: none;
+    background: rgba(5, 8, 14, 0.82); border: 2px dashed var(--accent);
+    align-items: center; justify-content: center; flex-direction: column; gap: 8px;
+    font-size: 20px; font-weight: 650; color: var(--text);
+  }
+  #dropOverlay .sub { font-size: 13px; color: var(--muted); font-weight: 400; }
+  #dropOverlay.show { display: flex; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #26344a; border-radius: 6px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-track { background: transparent; }
+
+  body.embedded .topbar, body.embedded #sidebar { display: none; }
+  body.embedded #app { grid-template-columns: 1fr; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><span class="dot"></span>PatientQA <span class="sub">call viewer</span></div>
+  <div class="load-actions">
+    <span class="hint">everything stays local — nothing is uploaded</span>
+    <button id="btnFiles">Open files…</button>
+    <button id="btnFolder" class="primary">Open calls folder…</button>
+    <input type="file" id="fileInput" multiple hidden>
+    <input type="file" id="dirInput" webkitdirectory multiple hidden>
+  </div>
+</header>
+
+<div id="app">
+  <aside id="sidebar">
+    <div class="side-title">Calls</div>
+    <div id="callList"></div>
+  </aside>
+
+  <main id="content">
+    <section id="empty">
+      <div class="glyph">🎧</div>
+      <div class="big">Load a call session</div>
+      <div>Open the <code>calls/</code> folder (or drag call folders anywhere on this page).</div>
+      <ol>
+        <li>Pick a folder like <code>calls/call-014_20260817T153001Z</code></li>
+        <li>The transcript, event timeline and recording are rendered below</li>
+        <li>Click any turn or event to jump the audio there</li>
+      </ol>
+      <div class="hint">Sessions without a finalized <code>recording.wav</code> (crashed or still
+      running) are reconstructed in-browser from the raw μ-law legs.</div>
+    </section>
+
+    <section id="callView" hidden>
+      <div class="card" id="callHeader"></div>
+
+      <div class="grid2">
+        <div class="card" id="personaCard"></div>
+        <div class="card" id="objectiveCard"></div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Recording</h3>
+        <div class="player-top">
+          <audio id="audio" controls></audio>
+          <span id="timeLabel">–:–– / –:––</span>
+        </div>
+        <canvas id="wave" title="click to seek · blue = agent (left ch) · violet = patient (right ch)"></canvas>
+        <div class="legend">
+          <span><span class="swatch" style="background:var(--agent)"></span>agent (their receptionist)</span>
+          <span><span class="swatch" style="background:var(--patient)"></span>patient (our bot)</span>
+          <span class="hint" id="audioSourceNote"></span>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 class="card-title">Transcript</h3>
+          <div id="transcript"></div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Events</h3>
+          <div class="filters" id="filters"></div>
+          <div id="timeline"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="dropOverlay">
+  <div>Drop call folders to load</div>
+  <div class="sub">calls/&lt;call-id&gt;_&lt;stamp&gt;/ — session.jsonl, meta.json, recording.wav</div>
+</div>
+
+<!--PQA_REPORT_DATA-->
+
+<script>
+"use strict";
+
+/* ================= utilities ================= */
+
+const $ = (sel) => document.querySelector(sel);
+const AUDIO = $("#audio");
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+function fmtClock(ms) {
+  if (ms == null || !isFinite(ms)) return "–:––";
+  const t = Math.max(0, ms) / 1000;
+  const m = Math.floor(t / 60);
+  const s = Math.floor(t % 60);
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+function fmtClockTenth(ms) {
+  const t = Math.max(0, ms) / 1000;
+  return `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}.${Math.floor((t % 1) * 10)}`;
+}
+function fmtBytes(n) {
+  if (n == null) return "–";
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+  return `${(n / 1024 / 1024).toFixed(2)} MB`;
+}
+function fmtMs(n) { return n == null ? "–" : `${Math.round(n)} ms`; }
+function latencyClass(ms) { return ms <= 1000 ? "ok" : ms <= 1500 ? "warn" : "bad"; }
+function reasonBadge(reason) {
+  const r = String(reason || "unknown");
+  if (/achiev|success|completed/.test(r)) return `<span class="badge ok">${esc(r)}</span>`;
+  if (/timeout|cap|abandoned|hangup/.test(r)) return `<span class="badge timeout">${esc(r)}</span>`;
+  if (/fail|error|abort/.test(r)) return `<span class="badge bad">${esc(r)}</span>`;
+  return `<span class="badge neutral">${esc(r)}</span>`;
+}
+
+const CATEGORY_COLORS = {
+  call: "#ff9e64", turn: "#58a6ff", brain: "#bc8cff", tts: "#3fb950",
+  stt: "#39c5cf", audio: "#d29922", barge_in: "#d29922",
+  error: "#f85149", note: "#8b949e",
+};
+function categoryOf(type) { return String(type || "").split(".")[0]; }
+function colorOf(type) { return CATEGORY_COLORS[categoryOf(type)] || "#8b949e"; }
+
+/* ================= state ================= */
+
+const state = {
+  sessions: [],      // parsed sessions, sorted oldest first
+  current: -1,
+  audioURL: null,    // object URL / data URL for <audio>
+  waveBase: null,    // offscreen-rendered waveform
+  waveDuration: 0,   // seconds of decoded audio
+  activeTurnKey: null,
+  categories: new Map(), // category -> {on, count}
+  searchText: "",
+  raf: 0,
+};
+
+/* ================= file loading ================= */
+
+function setupLoaders() {
+  $("#btnFiles").addEventListener("click", () => $("#fileInput").click());
+  $("#btnFolder").addEventListener("click", () => $("#dirInput").click());
+  $("#fileInput").addEventListener("change", (e) => loadFileList(e.target.files));
+  $("#dirInput").addEventListener("change", (e) => loadFileList(e.target.files));
+
+  const overlay = $("#dropOverlay");
+  let dragDepth = 0;
+  window.addEventListener("dragenter", (e) => {
+    if (!e.dataTransfer || !Array.from(e.dataTransfer.types).includes("Files")) return;
+    dragDepth++;
+    overlay.classList.add("show");
+  });
+  window.addEventListener("dragleave", () => {
+    dragDepth = Math.max(0, dragDepth - 1);
+    if (!dragDepth) overlay.classList.remove("show");
+  });
+  window.addEventListener("dragover", (e) => e.preventDefault());
+  window.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    dragDepth = 0;
+    overlay.classList.remove("show");
+    if (!e.dataTransfer) return;
+    const files = await filesFromDataTransfer(e.dataTransfer);
+    if (files.size) await loadFiles(files);
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "Space" && !/INPUT|TEXTAREA|SELECT|BUTTON/.test(document.activeElement?.tagName || "")) {
+      if (state.current >= 0) { e.preventDefault(); togglePlay(); }
+    }
+  });
+}
+
+async function filesFromDataTransfer(dt) {
+  const out = new Map();
+  const entries = Array.from(dt.items || [])
+    .map((i) => (i.webkitGetAsEntry ? i.webkitGetAsEntry() : null))
+    .filter(Boolean);
+  if (entries.length) {
+    await Promise.all(entries.map((en) => walkEntry(en, "", out)));
+  } else {
+    Array.from(dt.files).forEach((f) => out.set(f.name, f));
+  }
+  return out;
+}
+
+async function walkEntry(entry, prefix, out) {
+  if (entry.isFile) {
+    const file = await new Promise((res, rej) => entry.file(res, rej)).catch(() => null);
+    if (file) out.set(prefix + entry.name, file);
+  } else if (entry.isDirectory) {
+    const reader = entry.createReader();
+    for (;;) {
+      const batch = await new Promise((res, rej) => reader.readEntries(res, rej)).catch(() => []);
+      if (!batch.length) break;
+      for (const e of batch) await walkEntry(e, prefix + entry.name + "/", out);
+    }
+  }
+}
+
+function loadFileList(fileList) {
+  const files = new Map();
+  Array.from(fileList).forEach((f) => files.set(f.webkitRelativePath || f.name, f));
+  if (files.size) loadFiles(files);
+}
+
+async function loadFiles(files) {
+  const sessions = await parseSessions(files);
+  if (!sessions.length) {
+    alert("No session.jsonl found.\n\nDrop (or open) a per-call folder like calls/call-014_20260817T153001Z — or the whole calls/ folder.");
+    return;
+  }
+  state.sessions = mergeSessions(state.sessions, sessions);
+  renderCallList();
+  showSession(indexOfSession(sessions[0]));
+}
+
+function mergeSessions(oldOnes, newOnes) {
+  const byName = new Map(oldOnes.map((s) => [s.name, s]));
+  for (const s of newOnes) byName.set(s.name, s); // re-drop refreshes
+  return Array.from(byName.values()).sort((a, b) => sortKey(a) < sortKey(b) ? -1 : 1);
+}
+function sortKey(s) { return s.meta?.created_at || s.events[0]?.wall || s.name; }
+function indexOfSession(s) { return state.sessions.findIndex((x) => x.name === s.name); }
+
+async function parseSessions(files) {
+  const byDir = new Map();
+  for (const [path, file] of files) {
+    const cut = path.lastIndexOf("/");
+    const dir = cut === -1 ? "" : path.slice(0, cut);
+    const name = cut === -1 ? path : path.slice(cut + 1);
+    if (!byDir.has(dir)) byDir.set(dir, new Map());
+    byDir.get(dir).set(name, file);
+  }
+  const sessions = [];
+  for (const [dir, dirFiles] of byDir) {
+    const sessionFile = dirFiles.get("session.jsonl");
+    if (!sessionFile) continue;
+    let meta = {};
+    try { meta = JSON.parse(await dirFiles.get("meta.json").text()); }
+    catch { /* missing or broken meta — events still render */ }
+    const parsed = parseJsonl(await sessionFile.text());
+    sessions.push({
+      name: dir || sessionFile.name,
+      meta,
+      events: parsed.events,
+      badLines: parsed.bad,
+      audioSource: audioSourceFor(dirFiles, parsed.events),
+    });
+  }
+  return sessions;
+}
+
+function audioSourceFor(dirFiles, events) {
+  const wav = dirFiles.get("recording.wav");
+  if (wav) return { kind: "wav", file: wav };
+  const inbound = dirFiles.get("audio/inbound.ulaw") || dirFiles.get("inbound.ulaw");
+  const outbound = dirFiles.get("audio/outbound.ulaw") || dirFiles.get("outbound.ulaw");
+  if (inbound || outbound) return { kind: "legs", inbound, outbound, events };
+  return null;
+}
+
+function parseJsonl(text) {
+  const events = [];
+  let bad = 0;
+  for (const line of text.split("\n")) {
+    const t = line.trim();
+    if (!t) continue;
+    try { events.push(JSON.parse(t)); } catch { bad++; }
+  }
+  return { events, bad };
+}
+
+/* ================= derived session data ================= */
+
+function manifestOf(session) {
+  return session.meta?.manifest
+    || session.events.find((e) => e.type === "call.started")?.data?.manifest
+    || {};
+}
+function lastEvent(session) {
+  return session.events[session.events.length - 1] || null;
+}
+function durationOf(session) {
+  const ended = session.events.findLast?.((e) => e.type === "call.ended");
+  return (ended || lastEvent(session) || {}).t_ms || 0;
+}
+function endReasonOf(session) {
+  const ended = session.events.findLast?.((e) => e.type === "call.ended");
+  return ended?.data?.reason || null;
+}
+function turnsOf(session) {
+  return session.events.filter((e) => e.type === "turn.agent" || e.type === "turn.patient");
+}
+function respondMsList(session) {
+  return session.events
+    .filter((e) => e.type === "turn.patient" && typeof e.data?.respond_ms === "number")
+    .map((e) => e.data.respond_ms);
+}
+
+/* ================= sidebar ================= */
+
+function renderCallList() {
+  $("#callList").innerHTML = state.sessions.map((s, i) => {
+    const manifest = manifestOf(s);
+    const who = manifest?.persona?.name || "unknown persona";
+    return `
+      <div class="call-item ${i === state.current ? "active" : ""}" data-i="${i}" title="${esc(s.name)}">
+        <div class="cid">${esc(s.meta?.call_id || s.name)}</div>
+        <div class="who">${esc(who)}</div>
+        <div class="row2">
+          <span class="hint">${fmtClock(durationOf(s))}</span>
+          ${endReasonOf(s) ? reasonBadge(endReasonOf(s)) : ""}
+        </div>
+      </div>`;
+  }).join("");
+  $("#callList").querySelectorAll(".call-item").forEach((el) =>
+    el.addEventListener("click", () => showSession(Number(el.dataset.i)))
+  );
+}
+
+/* ================= session rendering ================= */
+
+function showSession(i) {
+  if (i < 0 || i >= state.sessions.length) return;
+  state.current = i;
+  const session = state.sessions[i];
+
+  if (state.audioURL?.startsWith("blob:")) URL.revokeObjectURL(state.audioURL);
+  state.audioURL = null;
+  state.waveBase = null;
+  state.activeTurnKey = null;
+  AUDIO.removeAttribute("src");
+  AUDIO.load();
+
+  $("#empty").hidden = true;
+  $("#callView").hidden = false;
+  renderCallList();
+  renderHeader(session);
+  renderPersona(session);
+  renderObjective(session);
+  renderTranscript(session);
+  renderTimeline(session);
+  setupAudio(session);
+}
+
+function audioSizeLabel(source) {
+  if (!source) return "none";
+  if (source.kind === "url") return "embedded";
+  if (source.kind === "wav") return fmtBytes(source.file.size);
+  return fmtBytes((source.inbound?.size || 0) + (source.outbound?.size || 0));
+}
+
+function renderHeader(session) {
+  const manifest = manifestOf(session);
+  const persona = manifest.persona || {};
+  const replies = respondMsList(session);
+  const avg = replies.length ? Math.round(replies.reduce((a, b) => a + b, 0) / replies.length) : null;
+  const max = replies.length ? Math.max(...replies) : null;
+  const turns = turnsOf(session);
+  const reason = endReasonOf(session);
+  const created = session.meta?.created_at || session.events[0]?.wall || "";
+
+  $("#callHeader").innerHTML = `
+    <div class="call-header-top">
+      <span class="call-id">${esc(session.meta?.call_id || session.name)}</span>
+      ${reason ? reasonBadge(reason) : ""}
+      <span class="hint">${esc(session.name)}</span>
+      <span class="spacer"></span>
+      <span class="hint">${esc(created)}</span>
+    </div>
+    <div class="persona-line">
+      ${esc(persona.name || "Unknown persona")}${persona.age ? `, ${esc(persona.age)}` : ""}
+      ${persona.gender ? `· ${esc(persona.gender)}` : ""}${persona.language ? ` · ${esc(persona.language)}` : ""}
+      ${session.badLines ? `<span class="hint"> · ${session.badLines} unparsable line(s) skipped</span>` : ""}
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="v">${fmtClock(durationOf(session))}</div><div class="l">duration</div></div>
+      <div class="stat"><div class="v">${turns.length}</div><div class="l">turns</div></div>
+      <div class="stat"><div class="v">${fmtMs(avg)}</div><div class="l">avg response</div></div>
+      <div class="stat"><div class="v ${max != null ? latencyClass(max) : ""}">${fmtMs(max)}</div><div class="l">max response</div></div>
+      <div class="stat"><div class="v">${session.events.length}</div><div class="l">events</div></div>
+      <div class="stat"><div class="v">${audioSizeLabel(session.audioSource)}</div><div class="l">audio</div></div>
+    </div>`;
+}
+
+function kv(pairs) {
+  return `<div class="kv">${pairs
+    .filter(([, v]) => v != null && v !== "" && (!Array.isArray(v) || v.length))
+    .map(([k, v]) => `<div class="k">${esc(k)}</div><div class="v">${
+      Array.isArray(v) ? v.map(esc).join(", ") : v
+    }</div>`)
+    .join("")}</div>`;
+}
+
+function renderPersona(session) {
+  const persona = manifestOf(session).persona;
+  if (!persona) {
+    $("#personaCard").innerHTML = `<h3 class="card-title">Persona</h3>
+      <div class="muted">No manifest metadata on this session (meta.json / call.started absent).</div>`;
+    return;
+  }
+  $("#personaCard").innerHTML = `
+    <h3 class="card-title">Persona</h3>
+    ${kv([
+      ["name", persona.name],
+      ["age / gender", [persona.age, persona.gender].filter(Boolean).join(" / ")],
+      ["language", persona.language],
+      ["background", persona.background],
+      ["speaking style", persona.speaking_style],
+      ["voice design", persona.voice?.design_prompt],
+      ["voice id", persona.voice?.voice_id],
+      ["medications", persona.medications],
+    ])}`;
+}
+
+function renderObjective(session) {
+  const objective = manifestOf(session).objective;
+  if (!objective) {
+    $("#objectiveCard").innerHTML = `<h3 class="card-title">Objective</h3>
+      <div class="muted">No objective recorded.</div>`;
+    return;
+  }
+  const curveballs = (objective.curveballs || []).map(
+    (c) => `<li><b>${esc(c.at || "?")}:</b> ${esc(c.action || JSON.stringify(c))}</li>`
+  ).join("");
+  const criteria = (objective.success_criteria || []).map((c) => `<li>${esc(c)}</li>`).join("");
+  $("#objectiveCard").innerHTML = `
+    <h3 class="card-title">Objective</h3>
+    ${kv([
+      ["type", objective.type ? `<span class="badge neutral">${esc(objective.type)}</span>` : null],
+      ["goal", objective.goal],
+      ["hidden context", objective.hidden_context],
+      ["termination", objective.termination],
+    ])}
+    ${curveballs ? `<div class="k muted" style="margin-top:8px">curveballs</div><ul class="plain">${curveballs}</ul>` : ""}
+    ${criteria ? `<div class="k muted" style="margin-top:8px">success criteria</div><ul class="plain">${criteria}</ul>` : ""}`;
+}
+
+/* ================= transcript ================= */
+
+function renderTranscript(session) {
+  const turns = turnsOf(session);
+  const box = $("#transcript");
+  if (!turns.length) {
+    box.innerHTML = `<div class="muted">No turn.agent / turn.patient events in this session.</div>`;
+    return;
+  }
+  box.innerHTML = turns.map((t) => {
+    const patient = t.type === "turn.patient";
+    const lat = patient && t.data?.respond_ms != null
+      ? `<span class="pill ${latencyClass(t.data.respond_ms)}">${fmtMs(t.data.respond_ms)}</span>` : "";
+    return `
+      <div class="turn ${patient ? "patient" : "agent"}" data-t="${t.t_ms}" data-key="${t.seq}">
+        <div class="meta">
+          <span class="who">${patient ? "PATIENT" : "AGENT"}</span>
+          <span>${fmtClockTenth(t.t_ms)}</span>
+          ${lat}
+        </div>
+        <div class="text">${esc(t.data?.text || "")}</div>
+      </div>`;
+  }).join("");
+  box.querySelectorAll(".turn").forEach((el) =>
+    el.addEventListener("click", () => seekTo(Number(el.dataset.t) / 1000))
+  );
+}
+
+function highlightTurnAt(ms) {
+  const box = $("#transcript");
+  const turns = box.querySelectorAll(".turn");
+  let active = null;
+  turns.forEach((el) => {
+    if (Number(el.dataset.t) <= ms + 250) active = el;
+  });
+  const key = active?.dataset.key || null;
+  if (key !== state.activeTurnKey) {
+    state.activeTurnKey = key;
+    turns.forEach((el) => el.classList.toggle("active", el === active));
+    if (active && !playing()) active.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+}
+
+/* ================= timeline ================= */
+
+function renderTimeline(session) {
+  state.categories = new Map();
+  for (const e of session.events) {
+    const cat = categoryOf(e.type);
+    const entry = state.categories.get(cat) || { on: true, count: 0 };
+    entry.count++;
+    state.categories.set(cat, entry);
+  }
+  state.searchText = "";
+  renderFilterChips();
+  renderEventRows(session);
+}
+
+function renderFilterChips() {
+  const chips = Array.from(state.categories.entries()).map(([cat, cfg]) => `
+    <span class="fchip ${cfg.on ? "" : "off"}" data-cat="${esc(cat)}" style="color:${CATEGORY_COLORS[cat] || "#8b949e"}">
+      ${esc(cat)} · ${cfg.count}
+    </span>`).join("");
+  $("#filters").innerHTML = `${chips}
+    <input id="search" type="search" placeholder="filter events…" value="${esc(state.searchText)}">`;
+  $("#filters").querySelectorAll(".fchip").forEach((el) =>
+    el.addEventListener("click", () => {
+      const cfg = state.categories.get(el.dataset.cat);
+      cfg.on = !cfg.on;
+      el.classList.toggle("off", !cfg.on);
+      renderEventRows(state.sessions[state.current]);
+    })
+  );
+  $("#search").addEventListener("input", (e) => {
+    state.searchText = e.target.value.toLowerCase();
+    renderEventRows(state.sessions[state.current]);
+  });
+}
+
+function summarizeEvent(e) {
+  const d = e.data || {};
+  switch (e.type) {
+    case "call.started": return `<span class="muted">call started —</span> ${esc(d.manifest?.persona?.name || "")}`;
+    case "call.connected": return `media stream connected${d.call_sid ? ` <span class="muted">· ${esc(d.call_sid)}</span>` : ""}`;
+    case "call.ended": return reasonBadge(d.reason) + (d.error ? ` <span class="muted">${esc(d.error)}</span>` : "");
+    case "turn.agent":
+    case "stt.final":
+    case "audio.played": return `“${esc(d.text || "")}”`;
+    case "turn.patient": return `“${esc(d.text || "")}” <span class="pill ${latencyClass(d.respond_ms)}">${fmtMs(d.respond_ms)}</span>`;
+    case "brain.reply": return `→ “${esc(d.say || "")}” <span class="pill ${latencyClass(d.latency_ms)}">${fmtMs(d.latency_ms)}</span>`;
+    case "tts.done": return `synthesized ${esc(d.chars ?? "?")} chars → ${fmtBytes(d.audio_bytes)} <span class="pill ${latencyClass(d.latency_ms)}">${fmtMs(d.latency_ms)}</span>`;
+    case "note": return esc(d.text || "");
+    case "error": return `<span style="color:var(--bad)">${esc(d.text || d.error || "error")}</span>`;
+    default: {
+      const rest = { ...d };
+      delete rest.text; delete rest.say;
+      const extra = JSON.stringify(rest);
+      return `${esc(d.text || d.say || "")} ${extra !== "{}" ? `<span class="muted">${esc(extra)}</span>` : ""}`;
+    }
+  }
+}
+
+function renderEventRows(session) {
+  const hidden = new Set(
+    Array.from(state.categories.entries()).filter(([, c]) => !c.on).map(([cat]) => cat)
+  );
+  const q = state.searchText;
+  const rows = session.events
+    .map((e, i) => ({ e, i }))
+    .filter(({ e }) => !hidden.has(categoryOf(e.type)))
+    .filter(({ e }) => !q || JSON.stringify(e).toLowerCase().includes(q))
+    .map(({ e, i }) => {
+      const color = colorOf(e.type);
+      return `
+      <div class="ev" data-i="${i}" data-t="${e.t_ms}">
+        <span class="t">${fmtClockTenth(e.t_ms)}</span>
+        <span class="type" style="color:${color};border:1px solid ${color}44;background:${color}14">${esc(e.type)}</span>
+        <span class="summary">${summarizeEvent(e)}</span>
+        <details>
+          <summary>event #${esc(e.seq ?? i)} · ${esc(e.wall || "")}</summary>
+          <pre>${esc(JSON.stringify(e, null, 2))}</pre>
+        </details>
+      </div>`;
+    })
+    .join("");
+  $("#timeline").innerHTML = rows || `<div class="muted" style="padding:10px">No events match the current filters.</div>`;
+  $("#timeline").querySelectorAll(".ev").forEach((el) => {
+    el.addEventListener("click", (ev) => {
+      if (ev.target.closest("details")) return; // let JSON expand without seeking
+      seekTo(Number(el.dataset.t) / 1000);
+    });
+  });
+}
+
+/* ================= audio: source, waveform, sync ================= */
+
+async function setupAudio(session) {
+  const source = session.audioSource;
+  const note = $("#audioSourceNote");
+  if (!source) {
+    AUDIO.removeAttribute("src");
+    AUDIO.load();
+    note.textContent = "no audio in this session";
+    $("#timeLabel").textContent = "–:–– / –:––";
+    drawEmptyWave();
+    return;
+  }
+  try {
+    if (source.kind === "url") {
+      state.audioURL = source.url;
+      note.textContent = "embedded in this report";
+    } else if (source.kind === "wav") {
+      state.audioURL = URL.createObjectURL(source.file);
+      note.textContent = "from recording.wav";
+    } else {
+      const blob = await legsToWavBlob(source.inbound, source.outbound, source.events);
+      state.audioURL = URL.createObjectURL(blob);
+      note.textContent = "rebuilt in-browser from raw μ-law legs";
+    }
+    AUDIO.src = state.audioURL;
+    const bytes = source.kind === "url"
+      ? dataUrlToArrayBuffer(source.url)
+      : await (source.kind === "wav" ? source.file.arrayBuffer() : (await (await fetch(state.audioURL)).arrayBuffer()));
+    await drawWaveFromBytes(bytes);
+  } catch (err) {
+    console.error("audio setup failed:", err);
+    note.textContent = `audio unavailable (${err?.message || err})`;
+    drawEmptyWave();
+  }
+}
+
+function dataUrlToArrayBuffer(url) {
+  const binary = atob(url.slice(url.indexOf(",") + 1));
+  const buf = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) buf[i] = binary.charCodeAt(i);
+  return buf.buffer;
+}
+
+/* Fallback for sessions that died before close(): mux raw μ-law legs into a
+   WAV blob in-browser — mono, both legs placed at their event times and
+   summed, same layout Python's mixdown_wav produces. */
+async function legsToWavBlob(inboundFile, outboundFile, events) {
+  const table = ulawDecodeTable();
+  const inb = inboundFile ? new Uint8Array(await inboundFile.arrayBuffer()) : new Uint8Array(0);
+  const outb = outboundFile ? new Uint8Array(await outboundFile.arrayBuffer()) : new Uint8Array(0);
+  let exact = null, connected = null, lastT = 0;
+  const segments = [];
+  for (const e of events || []) {
+    lastT = Math.max(lastT, e.t_ms || 0);
+    if (e.type === "audio.inbound" && exact === null) exact = e.t_ms || 0;
+    else if (e.type === "call.connected" && connected === null) connected = e.t_ms || 0;
+    else if (e.type === "audio.played") segments.push([(e.t_ms || 0), (e.data && e.data.audio_bytes) || 0]);
+  }
+  const inboundOffset = (exact !== null ? exact : (connected !== null ? connected : 0)) * 8;
+  // Patient runs play through one FIFO queue: pack sequentially, floored at
+  // each run's event time, or fast synthesis stacks two responses on top of
+  // each other (same rule as Python's mixdown_wav).
+  const runs = [];
+  let cursor = 0, playedUntil = 0;
+  for (const [t, size] of segments) {
+    if (size <= 0 || cursor >= outb.length) continue;
+    const start = Math.max(t * 8, playedUntil);
+    runs.push([start, outb.subarray(cursor, cursor + size)]);
+    cursor += size;
+    playedUntil = start + size;
+  }
+  if (cursor < outb.length) runs.push([playedUntil, outb.subarray(cursor)]);
+  let frames = Math.max(inb.length + inboundOffset, lastT * 8);
+  for (const [start, run] of runs) frames = Math.max(frames, start + run.length);
+  const pcm = new Int16Array(frames);
+  const addAt = (base, u8) => {
+    for (let i = 0; i < u8.length; i++) {
+      let v = pcm[base + i] + table[u8[i]];
+      pcm[base + i] = v > 32767 ? 32767 : (v < -32768 ? -32768 : v);
+    }
+  };
+  addAt(inboundOffset, inb);
+  for (const [start, run] of runs) addAt(start, run);
+  const buf = new ArrayBuffer(44 + pcm.length * 2);
+  const dv = new DataView(buf);
+  const writeStr = (off, s) => { for (let i = 0; i < s.length; i++) dv.setUint8(off + i, s.charCodeAt(i)); };
+  writeStr(0, "RIFF"); dv.setUint32(4, 36 + pcm.length * 2, true); writeStr(8, "WAVE");
+  writeStr(12, "fmt "); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+  dv.setUint32(24, 8000, true); dv.setUint32(28, 16000, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true);
+  writeStr(36, "data"); dv.setUint32(40, pcm.length * 2, true);
+  new Int16Array(buf, 44).set(pcm);
+  return new Blob([buf], { type: "audio/wav" });
+}
+
+function ulawDecodeTable() {
+  const t = new Int16Array(256);
+  for (let u = 0; u < 256; u++) {
+    const v = ~u & 0xff;
+    let s = ((v & 0x0f) << 3) + 0x84;
+    s <<= (v & 0x70) >> 4;
+    t[u] = (v & 0x80) ? 0x84 - s : s - 0x84;
+  }
+  return t;
+}
+
+async function drawWaveFromBytes(arrayBuffer) {
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  const ctx = new Ctx();
+  const buffer = await ctx.decodeAudioData(arrayBuffer.slice(0));
+  ctx.close?.();
+  state.waveDuration = buffer.duration;
+
+  const canvas = $("#wave");
+  const dpr = window.devicePixelRatio || 1;
+  const cssW = canvas.clientWidth || 900;
+  const cssH = canvas.clientHeight || 96;
+  canvas.width = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
+  const off = document.createElement("canvas");
+  off.width = canvas.width;
+  off.height = canvas.height;
+  const c = off.getContext("2d");
+  c.scale(dpr, dpr);
+
+  const W = cssW, H = cssH, mid = H / 2;
+  c.fillStyle = "#0a0e16";
+  c.fillRect(0, 0, W, H);
+  c.strokeStyle = "#1c2940";
+  c.beginPath(); c.moveTo(0, mid); c.lineTo(W, mid); c.stroke();
+
+  const channels = [
+    { data: buffer.getChannelData(0), color: "rgba(88, 166, 255, 0.9)" },
+    { data: buffer.numberOfChannels > 1 ? buffer.getChannelData(1) : buffer.getChannelData(0),
+      color: "rgba(188, 140, 255, 0.55)" },
+  ];
+  for (const ch of channels) {
+    const len = ch.data.length;
+    const step = Math.max(1, Math.floor(len / W));
+    c.strokeStyle = ch.color;
+    c.lineWidth = 1;
+    c.beginPath();
+    for (let x = 0; x < W; x++) {
+      const start = Math.floor((x / W) * len);
+      const end = Math.min(len, start + Math.max(1, Math.floor(len / W)));
+      let lo = 1, hi = -1;
+      for (let j = start; j < end; j += step) {
+        const v = ch.data[j];
+        if (v < lo) lo = v;
+        if (v > hi) hi = v;
+      }
+      if (hi < lo) continue;
+      const yTop = mid - hi * (mid - 4);
+      const yBot = mid - lo * (mid - 4);
+      c.moveTo(x + 0.5, yTop);
+      c.lineTo(x + 0.5, Math.max(yBot, yTop + 0.5));
+    }
+    c.stroke();
+  }
+  state.waveBase = off;
+  drawPlayhead();
+
+  canvas.onclick = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const frac = (e.clientX - rect.left) / rect.width;
+    seekTo(frac * (AUDIO.duration || state.waveDuration || 0));
+  };
+}
+
+function drawEmptyWave() {
+  state.waveBase = null;
+  const canvas = $("#wave");
+  const ctx = canvas.getContext("2d");
+  canvas.width = canvas.clientWidth || 900;
+  canvas.height = canvas.clientHeight || 96;
+  ctx.fillStyle = "#0a0e16";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#5b6c84";
+  ctx.textAlign = "center";
+  ctx.fillText("no audio", canvas.width / 2, canvas.height / 2);
+}
+
+function drawPlayhead() {
+  const canvas = $("#wave");
+  const ctx = canvas.getContext("2d");
+  if (!state.waveBase) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(state.waveBase, 0, 0);
+  const dur = AUDIO.duration || state.waveDuration;
+  if (!dur || !isFinite(dur)) return;
+  const frac = Math.min(1, AUDIO.currentTime / dur);
+  const x = frac * canvas.width;
+  ctx.strokeStyle = "#f0f6fc";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+  ctx.fillStyle = "rgba(240, 246, 252, 0.85)";
+  ctx.beginPath(); ctx.moveTo(x - 4, 0); ctx.lineTo(x + 4, 0); ctx.lineTo(x, 6); ctx.fill();
+}
+
+function playing() { return AUDIO && !AUDIO.paused && !AUDIO.ended; }
+
+function togglePlay() {
+  if (!AUDIO.src) return;
+  if (playing()) AUDIO.pause();
+  else AUDIO.play().catch(() => {});
+}
+
+function seekTo(seconds) {
+  if (!AUDIO.src || !isFinite(seconds)) return;
+  AUDIO.currentTime = Math.max(0, seconds);
+  if (!playing()) AUDIO.play().catch(() => {});
+  syncNow();
+}
+
+function syncNow() {
+  const ms = AUDIO.currentTime * 1000;
+  $("#timeLabel").textContent = `${fmtClockTenth(ms)} / ${fmtClockTenth((AUDIO.duration || state.waveDuration || 0) * 1000)}`;
+  highlightTurnAt(ms);
+  drawPlayhead();
+}
+
+function startSyncLoop() {
+  const tick = () => {
+    if (state.current >= 0 && (playing() || document.visibilityState === "visible")) {
+      syncNow();
+    }
+    state.raf = requestAnimationFrame(tick);
+  };
+  state.raf = requestAnimationFrame(tick);
+}
+
+/* ================= embedded report mode ================= */
+
+function loadEmbeddedReport() {
+  const report = window.__PQA_REPORT__;
+  if (!report?.sessions?.length) return false;
+  document.body.classList.add("embedded");
+  state.sessions = report.sessions.map((s) => ({
+    name: s.name,
+    meta: s.meta || {},
+    events: s.events || [],
+    badLines: 0,
+    audioSource: s.audio_data_url ? { kind: "url", url: s.audio_data_url } : null,
+  }));
+  return true;
+}
+
+/* ================= boot ================= */
+
+setupLoaders();
+AUDIO.addEventListener("loadedmetadata", syncNow);
+if (loadEmbeddedReport()) {
+  renderCallList();
+  showSession(0);
+}
+startSyncLoop();
+</script>
+</body>
+</html>
